@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+		<app title="Friday Night Funkin': Triple Dot Engine!"
+		file="TripleDot"
+		packageName="com.triple.dot"
+		package="com.triple.dot"
+		main="Main"
+		version="0.0.1"
+		company="TripleDot"/>
+
+		<set name="APP_ID" value="1321144385160876183"/> <!-- Replace discord_rpc-->
+
+		<app preloader="flixel.system.FlxPreloader"/>
+		<set name="SWF_VERSION" value="11.8"/>
+
+		<window width="1280"
+		height="720" fps=""
+		background="#000000"
+		hardware="true"
+		vsync="true"/>
+
+		<window if="desktop"
+		orientation="landscape" 
+		fullscreen="false"
+		resizable="true"
+		vsync="false"/>
+
+	<!-- _____________________________ Path Settings ____________________________ -->
+
+		<set name="BUILD_DIR" value="export/debug" if="debug" embed='true'/>
+		<set name="BUILD_DIR" value="export/release" unless="debug" embed='true'/>
+
+		<classpath name="source"/>
+
+
+		<assets path='assets' preload="true"/> 
+
+		<library name="songs"  preload="true"/>
+		<library name="shared" preload="true"/>
+		<library name="font"   preload="true"/>
+		<library name="videos" preload="true"/>
+		
+		<!-- this doesnt exist rn ig -->
+		<!-- <assets path='example_mods' rename='mods' embed='false'/> -->
+
+		<!-- <icon path="art/TD.png" size='16' embed='true'/>
+		<icon path="art/TD.png" size='32' embed='true'/>
+		<icon path="art/TD.png" size='64' embed='true'/>
+		<icon path="art/TD.png" 		  embed='true'/> -->
+	<!-- _______________________________ Libraries ______________________________ -->
+
+		<haxelib name="flixel" />
+		<haxedev set='webgl' />
+		<haxelib name="flixel-addons" />
+		<haxelib name="hscript" />
+		<haxelib name="flixel-ui" />
+		<haxelib name="linc_luajit" />
+		<haxelib name="hxCodec" />
+		<haxelib name="hxCodec" />
+		<!-- <haxelib name="faxe" /> -->
+		<haxelib name="discord_rpc" />
+		<haxedef name="FLX_NO_FOCUS_LOST_SCREEN" />
+		<haxedef name="HXC_DEBUG_TRACE"  />
+		<haxedef name="FLX_NO_DEBUG" />
+		<haxedef name="NAPE_RELEASE_BUILD" />
+		<haxedef name="HXCPP_CHECK_POINTER" />
+		<haxedef name="HXCPP_STACK_LINE" />
+	    <haxedef name='no-deprecation-warnings' />
+</project>
