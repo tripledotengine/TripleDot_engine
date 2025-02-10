@@ -1,0 +1,21 @@
+[Data]
+> (weeks): week.json, holds any week specific Data
+> (characters): character json's
+> (fonts): fonts
+[images]
+> (ui): holds both UI, and GUI + HUD assets
+> (menus): menu assets
+> (characters): sprites and xml's 
+[audio]
+> (music): music.. yeah1!
+> (songs): voice oggs + chart/meta data
+> (sounds): sfx, misc sounds used in other places
+[misc]
+> (models): 3d model folder
+> (stages): stages for every song + assets
+            basic stage is NOT in this folder
+> (videos): videos, also includes bigger 
+            sprite sheets so they're loaded correctly
+
+
+

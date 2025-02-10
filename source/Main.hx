@@ -1,6 +1,6 @@
 package;
 
-import api.ui.ApiDisplay;
+import api.ApiDisplay;
 import flixel.FlxG;
 import flixel.FlxGame;
 import flixel.FlxState;
@@ -80,7 +80,6 @@ class Main extends Sprite
 		fpsVar = new ApiDisplay(10, 3);
 		addChild(fpsVar);
 		Lib.current.stage.align = "tl";
-		Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
 
 
 		api.sys.ApiWinCPP.dark();
@@ -90,12 +89,7 @@ class Main extends Sprite
 		FlxG.autoPause = false;
 		FlxG.mouse.visible = false;
 		FlxG.signals.gameResized.add(onResize);
-		FlxG.signals.preStateSwitch.add(onStateSwitch);
-	}
-
-	private static function onStateSwitch()
-	{
-		scaleMode.resetSize();
+		// FlxG.signals.preStateSwitch.add(onStateSwitch);
 	}
 
 	static function onResize(w, h)

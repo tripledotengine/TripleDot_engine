@@ -49,7 +49,7 @@ class ApiFunc
 
 	public static function setHeader(text:String, image:String)
 	{
-		Application.current.window.setIcon(Image.fromFile('assets/images/${_assetpath}ui/$image.png'));
+		Application.current.window.setIcon(Image.fromFile(''));
 		Application.current.window.title = (text);
 	}
 
@@ -92,7 +92,7 @@ class ApiFunc
 		});
 	}
 	function completeWindowTwn(){
-		FlxG.updateFramerate = ClientPrefs.framerate;
+		FlxG.updateFramerate = 60;
 		var ogSize:FlxPoint = FlxPoint.get(1280, 720); // fuck you haxeflixel
 		//i have no clue what thsi is suppose to be 
 		var baseCamPos:FlxPoint = FlxPoint.get(0,0);

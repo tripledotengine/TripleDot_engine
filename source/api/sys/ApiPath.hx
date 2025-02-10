@@ -53,6 +53,12 @@ class ApiPath
 
 	inline static public function font(file:String)
 	{
-		return path('assets/api_assets/fonts/$file');
+		return path(file);
+	}
+
+	inline static public function sounds(file:String){
+		// FlxG.sound.playMusic(path(file));
+		return null;
 	}
 }
+

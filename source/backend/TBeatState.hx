@@ -1,4 +1,4 @@
-package source.backend;
+package backend;
 
 import flixel.FlxG;
 import flixel.addons.ui.FlxUIState;
@@ -77,12 +77,12 @@ class TBeatState extends FlxUIState
 	}
 
 	public static function resetState() {
-		MusicBeatState.switchState(FlxG.state);
+		FlxG.switchState(FlxG.state);
 	}
 
-	public static function getState():MusicBeatState {
+	public static function getState():TBeatState {
 		var curState:Dynamic = FlxG.state;
-		var leState:MusicBeatState = curState;
+		var leState:TBeatState = curState;
 		return leState;
 	}
 
@@ -105,7 +105,6 @@ class TBeatState extends FlxUIState
 	function getBeatsOnSection()
 	{
 		var val:Null<Float> = 4;
-		if(PlayState.SONG != null && PlayState.SONG.notes[curSection] != null) val = PlayState.SONG.notes[curSection].sectionBeats;
 		return val == null ? 4 : val;
 	}
 }

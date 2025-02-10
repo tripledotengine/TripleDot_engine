@@ -11,7 +11,6 @@ import openfl.display.Bitmap;
 import openfl.display.BitmapData;
 import sys.FileSystem;
 import sys.io.File;
-import menus.options.GraphicsSettingsSubState;
 import lime.app.Application;
 import openfl.Assets;
 import backend.*;
@@ -34,7 +33,7 @@ class Init extends TBeatState
     }
 
 	function initialize(){
-		menus.MenuHandler.state('mainMenu');
+		menus.MenuHandler.state('beta');
     }
 
     private var sickBeats:Int = 0;
