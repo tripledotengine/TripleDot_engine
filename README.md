@@ -17,4 +17,4 @@ for any questions you might have we have a [Discord](https://discord.gg/5UGyyCp7
 
 ## if you use Triple Dot you agree that you will credit all the people who worked on it
 
-[NOTE; Triple DOT! is not intended to be used on html Windows/Lunix OS's](https://tripledotengine.github.io/nonsystem)
+[NOTE; Triple DOT! is not intended to be used on html Windows/Lunix OS's](https://tripledotengine.github.io/nonsystems)
