@@ -102,7 +102,7 @@ class Main extends Sprite
 
 		@:privateAccess if (FlxG.cameras != null)
 			for (i in FlxG.cameras.list)
-				if (i != null && i._filters != null)
+				if (i != null && i.filters != null)
 					resetSpriteCache(i.flashSprite);
 		if (FlxG.game != null)
 			resetSpriteCache(FlxG.game);
@@ -170,7 +170,7 @@ class TGame extends FlxGame
 	 */
 	override function update():Void
 	{
-		#if DEBUG_FEATURES
+		#if debug
 		if (FlxG.keys.justPressed.P)
 			crashGame();
 		#end

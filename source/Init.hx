@@ -13,7 +13,6 @@ import sys.FileSystem;
 import sys.io.File;
 import lime.app.Application;
 import openfl.Assets;
-import backend.*;
 
 class Init extends TBeatState
 {

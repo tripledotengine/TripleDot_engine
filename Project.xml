@@ -33,7 +33,7 @@
 
 		<assets path='assets' preload="true"/> 
 		<assets path='api_assets' preload="true" embed="true"/> 
-		<assets path='embedded' preload="true" embed="true"/> 
+		<!-- <assets path='embedded' preload="true" embed="true"/>  -->
 
 		<icon path="art/TD.png" 		  embed='true'/>
 	<!-- _______________________________ Libraries ______________________________ -->
