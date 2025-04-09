@@ -1,64 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<project>
-		<app title="Friday Night Funkin': Triple Dot Engine!"
-		file="TripleDot"
-		packageName="com.triple.dot"
-		package="com.triple.dot"
-		main="Main"
-		version="0.0.1"
-		company="TripleDot"/>
+<project xmlns="http://lime.openfl.org/project/1.0.4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://lime.openfl.org/project/1.0.4 http://lime.openfl.org/xsd/project-1.0.4.xsd">
 
-		<set name="rpc_token" value="1321144385160876183"/>
-		<set name="Ename" value="Triple DOT!engine"/>
-		<!-- <set name="" value=""/> -->
+	<!-- _________________________ Application Settings _________________________ -->
 
-		<app preloader="flixel.system.FlxPreloader"/>
-		<set name="SWF_VERSION" value="11.8"/>
+	<app 	
+		title="Beta t!DOTe tEngine build" 
+		file="tEngine" 
+		main="Main" 
+		version="0.0.1" 
+		company="TdotTeam" 
+	/>
 
-		<window width="1280"
-		height="720" fps=""
-		background="#000000"
-		hardware="true"
-		fullscreen="false"
-		resizable="true"
-		vsync="true"
-		orientation="landscape" />
+	<source path="source" />
 
-	<!-- _____________________________ Path Settings ____________________________ -->
+	<icon path="assets/system/fuck.png"/>
 
-		<set name="BUILD_DIR" value="export/debug" if="debug" embed='true'/>
-		<set name="BUILD_DIR" value="export/release" unless="debug" embed='true'/>
+	<assets path="assets" preload="true"/>
 
-		<classpath name="source"/>
+	<set name="BUILD_DIR" value="export"/>
 
-		<assets path='assets' preload="true"/> 
-		<assets path='api_assets' preload="true" embed="true"/> 
-		<!-- <assets path='embedded' preload="true" embed="true"/>  -->
+	<assets path="assets/system" preload="true" embed="true"/>
 
-		<icon path="art/TD.png" 		  embed='true'/>
+	<!-- ____________________________ Window Settings ___________________________ -->
+
+	<app preloader="flixel.system.FlxPreloader" />
+
+	<set name="SWF_VERSION" value="11.8" />
+
+	<window width="640" height="480" fps="60" background="#000000" hardware="true" vsync="true" />
+
+	<window if="html5" resizable="true" />
+
+	<window if="desktop" orientation="landscape" fullscreen="false" resizable="true" />
+
+	<window if="mobile" orientation="landscape" fullscreen="true" width="0" height="0" />
+
 	<!-- _______________________________ Libraries ______________________________ -->
 
-		<haxelib name="flixel" />
-		<haxelib name="flixel-addons" />
-		<haxelib name="hscript" />
-		<haxelib name="flixel-ui" />
-		<haxelib name="hxCodec" />
-		<!-- <haxelib name="haxefmod" /> -->
-		<!-- haxelib install haxefmod 0.7.1-alpha  -->
-		<haxelib name="discord_rpc" />
-	<!-- In Repo Libs -->	
-<!-- https://github.com/toperri/haxemouse
-	mouse will be used as an event for el spoopers (for beta)
+	<haxelib name="flixel" />
+	<haxelib name="flixel-addons" />
+	<haxelib name="flixel-ui" />
+	<haxelib name="hxvlc"/>
+	<haxelib name="hxcpp"/>
+	<haxelib name="hscript"/>
 
+	<!-- ______________________________ Haxedefines _____________________________ -->
 
-	if you get any compilation lib errors run the bat in ./art
- -->
-<!-- put the haxedef's down here cuz they're boring as fuck -->
-		<haxedef name="FLX_NO_FOCUS_LOST_SCREEN" />
-		<haxedef name="HXC_DEBUG_TRACE"  />
-		<haxedef name="FLX_NO_DEBUG" />
-		<haxedef name="NAPE_RELEASE_BUILD" />
-		<haxedef name="HXCPP_CHECK_POINTER" />
-		<haxedef name="HXCPP_STACK_LINE" />
-	    <haxedef name='no-deprecation-warnings' />
+	<haxedef name="FLX_NO_HEALTH" />
+	<haxedef name="FLX_NO_MOUSE" if="mobile" />
+	<haxedef name="FLX_NO_MOUSE_ADVANCED" />
+	<haxedef name="FLX_NO_KEYBOARD" if="mobile" />
+	<haxedef name="FLX_NO_TOUCH" if="desktop" />
+	<haxedef name="FLX_NO_DEBUG" unless="debug" />
+	<haxedef name="NAPE_RELEASE_BUILD" unless="debug" />
+	<haxedef name="message.reporting" value="pretty" />
+	<haxedef name='no-deprecation-warnings' />
+	<haxedef name="FLX_NO_FOCUS_LOST_SCREEN" />
+
+	<!-- _________________________________ Custom _______________________________ -->
+
+	<!--Place custom nodes like icons here-->
 </project>
