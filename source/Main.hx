@@ -5,6 +5,7 @@ import openfl.display.Sprite;
 import twoB.sys.Display;
 import twoB.sys.TwoG;
 import twoB.Ufunc;
+import game.*;
 
 import flixel.FlxG;
 import flixel.FlxState;
@@ -32,7 +33,7 @@ class Main extends Sprite
 		frameR: 60,
 		noIntro: true,
 		fScreen: false,
-		initState: game.DebugState
+		initState: backend.DebugState
 	};
 
 

@@ -45,7 +45,7 @@ class Crash extends FlxState
 		report.borderSize = 1.5;
 		add(report);
 
-		new FlxTimer().start(10.0, timer -> {endState();});
+		//new FlxTimer().start(10.0, timer -> {endState();});
 	}
 
 	function endState() {
