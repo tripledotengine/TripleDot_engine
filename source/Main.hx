@@ -6,6 +6,7 @@ import twoB.sys.Display;
 import twoB.sys.TwoG;
 import twoB.Ufunc;
 import game.*;
+import backend.*;
 
 import flixel.FlxG;
 import flixel.FlxState;
@@ -28,9 +29,9 @@ class Main extends Sprite
 	
 
 	var game = {
-		width: 640,
-		height: 480,
-		frameR: 60,
+		width: SaveData.app.get('appWidth'),
+		height: SaveData.app.get('appHeight'),
+		frameR: SaveData.app.get('baseFPS'),
 		noIntro: true,
 		fScreen: false,
 		initState: backend.DebugState
@@ -67,15 +68,23 @@ class Main extends Sprite
 
 	private function setupGame()
 	{
+		if(SaveData.app.get('firstTime')){
+			SaveData.save();
+			SaveData.app.set('firstTime', false);
+		}
+
 
 		addChild(new TwoG(game.width, game.height, game.initState, game.frameR, game.frameR, game.noIntro, game.fScreen));
 		fpsVar = new Display(5, 0.5);
+		fpsVar.visible = SaveData.app.get('infoDisplay');
 		Lib.current.stage.align = "tl";
 
-		Ufunc.setHeaderColor(128, 7, 7);
+		Ufunc.setHeaderColor(SaveData.app.get('hColorR'), SaveData.app.get('hColorG'), SaveData.app.get('hColorB'));
 		Ufunc.headerFunc(true);
 		cpp.NativeGc.enable(true);
 		cpp.NativeGc.run(true);
+
+		FlxG.game.focusLostFramerate = 60;
 		FlxG.autoPause = false;
 		FlxG.mouse.visible = false;
 
