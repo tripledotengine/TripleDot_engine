@@ -12,9 +12,9 @@
 	/>
 
 
-	<set name="BUILD_DIR" value="export" if="debug"/>
+	<set name="BUILD_DIR" value="builds/export" if="debug"/>
 
-	<set name="BUILD_DIR" value="release" unless="debug"/>
+	<set name="BUILD_DIR" value="builds/release" unless="debug"/>
 	
 	<set name="DRPC_ID" value="null" />
 
