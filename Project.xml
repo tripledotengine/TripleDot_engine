@@ -4,11 +4,13 @@
 	<!-- _________________________ Application Settings _________________________ -->
 
 	<app 	
-		title="Beta t!DOTe tEngine build" 
+		title="t!DOTe tEngine build" 
 		file="tEngine" 
-		main="Main" 
-		version="0.0.1" 
-		company="TdotTeam" 
+		main="Main"
+		packageName="com.tEngine.group" 
+		package="com.tEngine.group" 
+		version="Alpha 1" 
+		company="tEngine" 
 	/>
 
 	<source path="source" />
@@ -43,7 +45,13 @@
 	<haxelib name="hxvlc"/>
 	<haxelib name="hxcpp"/>
 	<haxelib name="hscript"/>
-
+	<haxelib name="crashdumper"/>
+	
+	
+	<haxedef name="hscriptPos"/>
+	<haxedef name="HXC_DEBUG_TRACE" if="debug" />
+	<haxedef name="HXCPP_STACK_LINE" />
+	<haxedef name="HXCPP_STACK_TRACE"/>
 	<haxedef name="FLX_NO_HEALTH" />
 	<haxedef name="FLX_NO_MOUSE" if="mobile" />
 	<haxedef name="FLX_NO_MOUSE_ADVANCED" />

@@ -68,10 +68,9 @@ class Main extends Sprite
 
 	private function setupGame()
 	{
-		if(SaveData.app.get('firstTime')){
-			SaveData.save();
+		SaveData.save();
+		if(SaveData.app.get('firstTime'))
 			SaveData.app.set('firstTime', false);
-		}
 
 
 		addChild(new TwoG(game.width, game.height, game.initState, game.frameR, game.frameR, game.noIntro, game.fScreen));

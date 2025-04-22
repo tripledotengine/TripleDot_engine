@@ -44,10 +44,14 @@ class SaveData{
         'tdot-test_hard' => [0, 100, 'SS', '4.11.2025']
     ];
 
+    public static var modData:Map<String, Dynamic> = [
+        'mod' => ['settingName', 'settingAcess', ['valueType', 'value']]
+    ];
+
     public static function save(){
-        mods.bind('modsData','tEngine');
+        mods.bind('mods_Data','tEngine');
         //mod settings 
-		song.bind('songData', 'tEngine');
+		song.bind('song_Data', 'tEngine');
         //specifically song data
         win.bind('tEngine_data', 'tEngine');
         //application + gameplay + controls
@@ -60,42 +64,51 @@ class SaveData{
 	
 		song.data.song_Data = songData;
 
-        win.flush();
-		song.flush();
-        mods.flush();
-        FlxG.save.flush();
+        mods.data.mods_settings = modData;
 
-        load();
+        firstflush();
     }
 
     public static function load(){
-        if(win.data.app != null){
-            var savedMap:Map<String, Dynamic> = win.data.app;
-			for (name => value in savedMap){
-				app.set(name, value);}}
+         var AppMap:Map<String, Dynamic> = win.data.app;
+		for (name => value in AppMap){
+			app.set(name, value);}
 
-        if(win.data.gameplay != null){
-            var savedMap:Map<String, Dynamic> = win.data.gameplay;
-			for (name => value in savedMap){
-				gameplay.set(name, value);}}
+        var gameMap:Map<String, Dynamic> = win.data.gameplay;
+		for (name => value in gameMap){
+			gameplay.set(name, value);}
 
-        if(win.data.controls != null){
-            var savedMap:Map<String, Dynamic> = win.data.controls;
-			for (name => value in savedMap){
-				controls.set(name, value);}}
+        var contMap:Map<String, Dynamic> = win.data.controls;
+		for (name => value in contMap){
+			controls.set(name, value);}
 
-        if(song.data.song_Data != null){
-            var savedMap:Map<String, Dynamic> = song.data.song_Data;
-			for (name => value in savedMap){
-				songData.set(name, value);}}
+        var songMap:Map<String, Dynamic> = song.data.song_Data;
+		for (name => value in songMap){
+			songData.set(name, value);}
 
+            
+        var mnodMap:Map<String, Dynamic> = song.data.song_Data;
+		for (name => value in mnodMap){
+			songData.set(name, value);}
 
 
 		FlxG.sound.muteKeys = controls.get('muteK');
 		FlxG.sound.volumeDownKeys = controls.get('volDK');
 		FlxG.sound.volumeUpKeys = controls.get('volUK');
 		FlxG.keys.preventDefaultKeys = controls.get('PvDfK');
+
+        firstflush();
     }
+
+    public static function firstflush(){
+       win.flush();
+       song.flush();
+       mods.flush();
+       //FlxG.save.flush();
+   }
+
+
+
 
     public static function eraseData(?type:String){
         //will be expanded
