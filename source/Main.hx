@@ -85,7 +85,6 @@ class Main extends Sprite
 
 		FlxG.game.focusLostFramerate = 60;
 		FlxG.autoPause = false;
-		FlxG.mouse.visible = false;
 
 		addChild(fpsVar);
 	}

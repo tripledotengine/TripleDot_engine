@@ -6,14 +6,23 @@ import twoB.Paths;
 
 class Notes extends FlxSprite {
 
-    var texture:Any = null;
-    public function new(?x:Int, ?y:Int, ?texture:Any){
-        super();
-        this.x =x;
-        this.y =y;
-        this.texture = texture;
+    var t:Any = null;
 
-        loadGraphic(Paths.image(texture ?? 'images/notes/RGB.png'));
+    /**
+     * ## Hi!
+     * - [Hit Detector]()
+     * @param x X position
+     * @param y Y position
+     * @param t Alternate image
+     */
+
+    public function new(?x:Int, ?y:Int, ?t:Any){
+        super();
+        this.x = x;
+        this.y = y;
+        this.t = t;
+
+        loadGraphic(Paths.image(t ?? 'images/notes/RGB.png'));
         // change this code to pull from a data string
     }
 }

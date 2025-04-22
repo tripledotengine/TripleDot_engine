@@ -18,9 +18,15 @@ import openfl.utils.AssetType;
 import openfl.utils.Assets as OpenFlAssets;
 import sys.FileSystem;
 import sys.io.File;
+import flash.media.Sound;
 
 class Paths
 {
+	inline public static var SOUND_EXT = #if web "mp3" #else "ogg" #end;
+
+	public static var trackSound:Map<String, Sound> = [];
+	public static var trackImage:Map<String, FlxGraphic> = [];
+	
 	public static function path(path:String)
 	{
 		if (!FileSystem.exists(path))
@@ -34,7 +40,6 @@ class Paths
 
 	public static function newBitmap(file:String, ?bitmap:BitmapData = null){
 		bitmap = OpenFlAssets.getBitmapData(file);
-
 		var newGraphic:FlxGraphic = FlxGraphic.fromBitmapData(bitmap, false, file);
 		newGraphic.persist = true;
 		newGraphic.destroyOnNoUse = false;
@@ -44,10 +49,9 @@ class Paths
 	inline static public function image(file:String, ?bitmap:BitmapData = null)
 	{
 		bitmap = OpenFlAssets.getBitmapData(path('assets/'+file ));
-
 		var newBit = newBitmap(path('assets/'+file ), bitmap);
-
-		return newBit;
+		trackImage.set(file, newBit);
+		return trackImage.exists(file) ? trackImage.get(file) : newBit;
 
 	}
 
@@ -56,9 +60,15 @@ class Paths
 		return path('assets/fonts/'+file);
 	}
 
-	inline static public function sounds(file:String){
-		// FlxG.sound.playMusic(path(file));
-		return null;
+	inline static public function sounds(file:String)
+	{
+		trackSound.set(file, OpenFlAssets.getSound(path('assets/'+file+'.'+SOUND_EXT)));
+		return trackSound.get(file);
+	}
+	
+	inline static public function atlas(file:String, ?bitmap:BitmapData = null)
+	{
+		var r = ~/[pngjpg]+/g;
+		return FlxAtlasFrames.fromSparrow(image(file),path('assets/'+r.split(file)+'xml'));
 	}
 }
-

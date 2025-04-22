@@ -40,6 +40,7 @@ class DebugState extends FlxState
 	override public function create()
 	{
 		super.create();
+		FlxG.sound.playMusic(Paths.sounds('freakyMenu'));
 
 		_bg.loadGraphic(Paths.image('system/crashBg.png'));
 		_bg.scale.set(xScale,xScale);
