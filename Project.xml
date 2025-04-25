@@ -28,7 +28,7 @@
 
 	<assets path="assets" preload="true"/>
 
-	<assets path="engine" rename='assets' preload="true"/>
+	<assets path="_system" rename='assets' preload="true"/>
 
 
 	<!-- ____________________________ Window Settings ___________________________ -->
