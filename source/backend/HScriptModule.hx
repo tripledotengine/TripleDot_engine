@@ -4,7 +4,6 @@ class HScriptModule extends Iris{
     var hscript:String;
     var f:Script;
 
-
     public var script:String;
     public var crash:Bool;
 
@@ -15,30 +14,25 @@ class HScriptModule extends Iris{
     **/
     
     function new(?script:String, ?crash:Bool){
-
         this.script = script;
         this.crash = crash;
 
         f = (crash ? hscript(script) : crashScript(script));
         hscript = File.getContent(f);
 
-
         super(hscript, new IrisConfig(script, false, false));
 
         setBasic();
 
-	
 		try {
 			execute();
 		} catch(e:IrisError) {
 			this.destroy();
 			throw e;
 		}
-		
     }
     
-	override public function destroy()
-    {
+	override public function destroy(){
         super.destroy();
     }
 

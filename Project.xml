@@ -22,7 +22,7 @@
 
 	<source path="source"/>
 
-	<icon path="assets/system/fuck.png"/>
+	<icon path="_system/system/fuck.png"/>
 
 	<assets path='content' embed='false'/>
 
@@ -52,6 +52,7 @@
 	<haxelib name="flixel-ui" />
 	<haxelib name="hxvlc"/>
 	<haxelib name="hxcpp"/>
+	<haxelib name="bitmap"/>
 	<haxelib name="hscript"/>
 	<haxelib name="crashdumper" if="debug"/>
 	

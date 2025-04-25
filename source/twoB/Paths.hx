@@ -21,6 +21,11 @@ import sys.io.File;
 
 class Paths
 {
+	inline public static var SOUND_EXT = #if web "mp3" #else "ogg" #end;
+
+	public static var trackSound:Map<String, Sound> = [];
+	public static var trackImage:Map<String, FlxGraphic> = [];
+	
 	public static function path(path:String)
 	{
 		if (!FileSystem.exists(path))
@@ -33,22 +38,20 @@ class Paths
 	}
 
 	public static function newBitmap(file:String, ?bitmap:BitmapData = null){
-		bitmap = OpenFlAssets.getBitmapData(file);
+		bitmap.lock();
+		bitmap.disposeImage();
 
-		var newGraphic:FlxGraphic = FlxGraphic.fromBitmapData(bitmap, false, file);
-		newGraphic.persist = true;
-		newGraphic.destroyOnNoUse = false;
-		return newGraphic;
+		var bitGrap:FlxGraphic = FlxGraphic.fromBitmapData(bitmap, file);
+		bitGrap.persist = true;
+		bitGrap.destroyOnNoUse = false;
+		return bitGrap;
 	}
 
 	inline static public function image(file:String, ?bitmap:BitmapData = null)
 	{
-		bitmap = OpenFlAssets.getBitmapData(path('assets/'+file ));
-
-		var newBit = newBitmap(path('assets/'+file ), bitmap);
-
-		return newBit;
-
+		var newBit = newBitmap(path('assets/'+file ), OpenFlAssets.getBitmapData(path('assets/'+file )));
+		trackImage.set(file, newBit);
+		return trackImage.exists(file) ? trackImage.get(file) : newBit;
 	}
 
 	inline static public function font(file:String)
@@ -56,11 +59,17 @@ class Paths
 		return path('assets/fonts/'+file);
 	}
 
-	inline static public function sounds(file:String){
-		// FlxG.sound.playMusic(path(file));
-		return null;
+	inline static public function sounds(file:String)
+	{
+		trackSound.set(file, OpenFlAssets.getSound(path('assets/'+file+'.'+SOUND_EXT)));
+		return trackSound.get(file);
 	}
-
+		
+	inline static public function atlas(file:String, ?bitmap:BitmapData = null)
+	{
+		var r = ~/[pngjpg]+/g;
+		return FlxAtlasFrames.fromSparrow(image(file),path('assets/'+r.split(file)+'xml'));
+	}
 
 	inline static public function hscript(file:String)
 	{

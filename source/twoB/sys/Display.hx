@@ -53,6 +53,7 @@ class Display extends TextField{
 			text = ''; 
 			text += times.length + " FPS - ";
 			text += 'MEMORY: ${FlxStringUtil.formatBytes(mem)} / ${FlxStringUtil.formatBytes(memPeak)}';
+			text += '\nCommpilation Info\n(] ${Info.getGit()} [)';
 			text += (debug ? '\n>State: ${Type.getClass(FlxG.state)}' : '');
 			text += (debug ? '\n> Object Count: ${FlxG.state.members.length}' +
 	        				'\n> Camera Count: ${FlxG.cameras.list.length}' +
