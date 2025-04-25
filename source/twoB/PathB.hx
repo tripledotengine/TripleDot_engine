@@ -19,7 +19,7 @@ import openfl.utils.Assets as OpenFlAssets;
 import sys.FileSystem;
 import sys.io.File;
 
-class Paths
+class PathB
 {
 	public static function path(path:String)
 	{
@@ -61,15 +61,9 @@ class Paths
 		return null;
 	}
 
-
-	inline static public function hscript(file:String)
+	inline static public function atlas(file:String, ?bitmap:BitmapData = null)
 	{
-			return path('assets/scripts/'+file+'.hx');
-	}
-
-	inline static public function crashScript(file:String)
-	{
-			return path('assets/system/'+file+'.hx');
+			return FlxAtlasFrames.fromSparrow(image(file+'.png'),path('assets/'+file+'.xml'));
 	}
 }
 

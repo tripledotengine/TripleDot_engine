@@ -62,7 +62,7 @@ class TwoG extends FlxGame
 	override function update():Void
 	{
 		if (FlxG.keys.justPressed.F1)
-			crashGame();		
+			crashGame();	
 
 		try
 			super.update()

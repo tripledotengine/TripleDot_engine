@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="hill.png">
+<SubTexture name="hill anim0000" x="0" y="0" width="644" height="484" frameX="0" frameY="0" frameWidth="640" frameHeight="480" />
+<SubTexture name="hill anim0001" x="644" y="0" width="644" height="484" frameX="0" frameY="0" frameWidth="640" frameHeight="480" />
+<SubTexture name="hill anim0002" x="0" y="484" width="644" height="484" frameX="0" frameY="0" frameWidth="640" frameHeight="480" />
+</TextureAtlas>

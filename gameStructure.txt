@@ -1,0 +1,86 @@
+--New Files are indicated by[ | ]
+--[ ? ] indicates it's an if statement
+--[ \ ] indicates it's a function
+
+
+|Main: --(barely used dw)
+    |Stage:
+        >Hitbox
+        >Image
+        \function(?)
+        >?isItem >itemType
+    |Floor:
+        >Hitbox
+        >Image
+        >?canDamage >Damage(dmgPlayer=true)
+|Game
+    |Controls
+        >left
+        >right
+        >duck
+        >jump
+        >attack
+        >special
+        >pause
+        >accept
+        >deny
+    |Player:
+        >Controls
+        >Image
+        >Hitbox
+        >Health(?, id) = public
+        >Attack(?)
+        >playerType
+        >?specialControl = CharControl
+        |CharControl:
+            >charAttack
+            >charKey = Controls.special
+            >Attack(?)
+        |PlayerTarget:
+            \getPlayer(x,y)
+            \getOwn(x,y)
+            \getWalkable(Map:x, Map:y)
+            >mapPath(x,y) = getPlayer(), getWalkable(), getOwn()
+    |NPC:
+        >Image
+        >npcTpe >?isEnemy >target = Player
+        >movement >>isEnemy >path = PlayerTarget.mapPath()
+        >Function --if NPC != isEnemy then isInteractable
+        >Attack(?)  --if NPC == isEnemy then inRange
+        >Health(?, id)
+    |Damage:
+        >curHealth = Player.Health
+        >npcHealth = NPC.id.curHealth
+        \damage(?)
+        >dmgTaken  = (equal to attack stat) >curHealth - damage
+        >dmgTaken != (equal to attack stat) >npcHealth - damage
+    |Attack
+        >dmg = ?
+        >?attacked > Damage(?, id=player,dmgPlayer=?true)
+|BackEnd:
+    |LevelHandler:
+        >curLevel
+        >levelList
+        >curLevel > assetsList?
+    |Hitbox:
+        \getSize
+        >hitbox = getSize
+        >?isHurtbox > damage(?,id,dmgPlayer=true)
+    |ParseFiles:
+        \Image:
+            >path = ''
+            \getImage()
+            >return > getImage()
+        \Sound:
+            >path = ''
+            \getSound()
+            \return > getSound()
+        \File:
+            >path = ''
+            \getFile()
+            \return > getFile()
+    |SaveData:
+        >controls = Map()
+        >playerHP = Health(id)
+        >playerXY = player.x,player.y
+        >curlvl = LevelHandler.curLevel
