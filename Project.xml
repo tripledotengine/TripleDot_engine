@@ -30,6 +30,8 @@
 
 	<assets path="_system" rename='assets' preload="true"/>
 
+	<assets path="assets/fonts/tsPeam.ttf" embed='true'/>
+
 
 	<!-- ____________________________ Window Settings ___________________________ -->
 
@@ -55,7 +57,7 @@
 	<haxelib name="bitmap"/>
 	<haxelib name="hscript"/>
 	<haxelib name="crashdumper" if="debug"/>
-	
+	<haxelib name="hscript-iris"/>
 	
 	<haxedef name="hscriptPos"/>
 	<haxedef name="HXC_DEBUG_TRACE" if="debug" />

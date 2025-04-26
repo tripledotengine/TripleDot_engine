@@ -5,9 +5,9 @@ package backend;
  * Please use this if you call a HScript
  */
 
-class HSI(){
+class HSI{
     
-    var hscriptList:Array = [];
+    var hscriptList:Array<HScriptModule> = [];
     var hscript = new HScriptModule();
 
     function new(?script:String, ?crash:Bool){

@@ -1,8 +1,13 @@
 package backend;
 
+import crowplexus.iris.Iris;
+import crowplexus.iris.IrisConfig;
+import crowplexus.hscript.Expr.Error as IrisError;
+import crowplexus.hscript.Printer;
+
 class HScriptModule extends Iris{
     var hscript:String;
-    var f:Script;
+    var f:String;
 
     public var script:String;
     public var crash:Bool;
@@ -13,11 +18,11 @@ class HScriptModule extends Iris{
      * @param crash  If called from Crash (calling from crash builds the crash handler)
     **/
     
-    function new(?script:String, ?crash:Bool){
+    override public function new(?script:String, ?crash:Bool){
         this.script = script;
         this.crash = crash;
 
-        f = (crash ? hscript(script) : crashScript(script));
+        f = (crash ? Paths.hscript(script) : Paths.crashScript(script));
         hscript = File.getContent(f);
 
         super(hscript, new IrisConfig(script, false, false));

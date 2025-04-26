@@ -59,6 +59,8 @@ class DebugState extends FlxState
 
 		add(hitStrum);
 		add(_group);
+
+		var script = new HScriptModule('sega/Sega', true);
 	}
 
 	override public function update(elapsed:Float){
