@@ -31,28 +31,27 @@ class Ufunc {
         Utils.showMessageBox(caption, message);
     }
 
-	public static function setHeaderColor(r:Int, g:Int, b:Int){
-        Utils.setWindowBorderColor(r,g,b);
+	public static function setHeaderColor(r:Int, g:Int, b:Int, ?a:Int = 1){
+        // Utils.setWindowBorderColor(r,g,b); : Utils.setWindowColorMode(a);
     }
 
 	public static function setWinAlpha(alpha:Float = 1) {
         Utils.setWindowAlpha(alpha);
     }
 
+    public static function getOSVer(){
+        return Utils.getOSVersion();
+    }
+
     public static function headerFunc(set:Bool){
-        if (set == true)
+        if (set == true )
             Utils.delMinMax();
-         else
+        else
             Utils.addMinMax();
     }
 
 	public static function getWinAlpha():Float{
         return Utils.getWindowAlpha();}
-
-	static public function getCursorPos(){
-        var xy:String = '${Utils.getCursorPositionY()}, ${Utils.getCursorPositionX()}';
-		return xy;
-	}
 
 	public static function winScreenShot(path:String) {
        // Utils.windowsScreenShot(path);
@@ -61,11 +60,6 @@ class Ufunc {
 
 	public static function setTaskbar(hide:Bool) {
         Utils.hideTaskbar(hide);
-    }
-
-	public static function moveWindow(x:Int, y:Int) {
-        Utils.moveDesktopWindowsInX(x);
-        Utils.moveDesktopWindowsInY(y);
     }
 
 	public static function setWindowLayeredMode(numberMode:Int) {

@@ -1,5 +1,7 @@
 package twoB;
 
+using StringTools;
+using Lambda;
 class Info{
 
     public static macro  function getGit():haxe.macro.Expr.ExprOf<String>{
@@ -21,7 +23,27 @@ class Info{
 			nproc.exitCode(true);
 		}catch (e){}
 
-		// return macro 'Branch: ${branchName}, Commit:  ${commitHash}';
         return macro  'Commit('+$v{commitNumn}+'): '+ $v{commitHash}+'\nOn Branch: '+$v{branchName};
     }
+
+//     macro public static function buildDate():ExprOf<Date> {
+//         var date = Date.now();
+//         var year = toExpr(date.getFullYear());
+//         var month = toExpr(date.getMonth());
+//         var day = toExpr(date.getDate());
+//         var hours = toExpr(date.getHours());
+//         var mins = toExpr(date.getMinutes());
+//         var secs = toExpr(date.getSeconds());
+//         return macro new Date($year, $month, $day, $hours, $mins, $secs);
+//     }
+
+
+//     macro public static function buildDateString():ExprOf<String> {
+//         return toExpr(Date.now().toString());
+//     }
+//     macro public static function buildGitCommitSha():ExprOf<String> {
+//         var proc = new sys.io.Process('git', ['log', "--pretty=format:'%h'", '-n', '1']);
+//         var sha1 = proc.stdout.readLine();
+//         return toExpr(sha1);
+//     }
 }

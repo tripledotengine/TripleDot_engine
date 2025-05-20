@@ -2,12 +2,15 @@ package backend;
 
 import twoB.*;
 import backend.*;
+import melo.mc.MButton;
+import melo.mc.ChatScript;
+
 import flixel.FlxState;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.ui.*;
 import flixel.math.FlxMath;
-import flixel.text.FlxText;
+import flixel.text.FlxText; 
 import flixel.ui.FlxButton;
 import flixel.util.FlxColor;
 import haxe.Json;
@@ -18,8 +21,29 @@ import flixel.math.FlxPoint;
 import flixel.FlxObject;
 import flixel.input.keyboard.FlxKeyboard;
 
-class DebugState extends FlxState
-{
+import filters.*;
+import openfl.Lib;
+import openfl.filters.ShaderFilter;
+import openfl.filters.BitmapFilter;
+
+import game.shaders.PixelShader;
+import game.shaders.OutlineShader;
+import game.shaders.VHSShader;
+import game.shaders.CRTShader;
+import game.shaders.LightShader;
+import game.shaders.HighCont;
+import game.shaders.ToneShader;
+
+import game.stages.MBTest;
+
+class DebugState extends FlxState{
+	var vhs = new VHSShader();
+	var ctr = new CRTShader();
+	var hct = new HighCont();
+	var tone = new ToneShader('BLack', 'red');
+
+	var filters:Array<BitmapFilter> = [];
+
 	static var xScale = 0.4;
 	static var mScale = 0;
 	var _bg = new FlxSprite();
@@ -37,57 +61,69 @@ class DebugState extends FlxState
 
 	var key:FlxKeyboard;
 
+	var nuru = new FlxSprite(0, 0);
+
+	var shaderCam:FlxCamera;
+	
+	var buttonXD:MButton;
+
+	var chat = new ChatScript(260, FlxG.height);
+
+	var guh:MBTest;
+
 	override public function create()
 	{
+		// shaderCam = new FlxCamera();
+		// shaderCam.bgColor.alpha = 0;
+		// FlxG.cameras.add(shaderCam, false);
+		// shaderCam.filters = new ShaderFilter(vhs);
+
 		super.create();
-		FlxG.sound.playMusic(Paths.sounds('data/songs/test/test'));
+		FlxG.sound.playMusic(Paths.sounds('data/music/TrollageFiles'));
 
 		_bg.loadGraphic(Paths.image('system/crashBg.png'));
 		_bg.scale.set(xScale,xScale);
+		_bg.scrollFactor.set(.95, .95);
 		_bg.screenCenter();
 		add(_bg);
 
-		
-		report.setFormat(Paths.font('vcr.ttf'), 32, 0xFFFFFFFF, CENTER, OUTLINE, 0xFF000000);
-		report.screenCenter(Y);
-		report.borderSize = 1.5;
-		add(report);
 
-		_button.loadGraphic(Paths.image('images/start.png'));
-		_button.screenCenter(Y);
-		add(_button);
+		nuru.frames = Paths.atlas('images/spr/NeuroSamaSprites.png','images/spr/NeuroSamaSprites');
+		nuru.animation.addByPrefix('1', 'NeuroSamaIdle', 24, true);
+		nuru.animation.play('1');
+		nuru.scale.set(0.4,0.4);
+		nuru.scrollFactor.set(.95, .95);
+		nuru.screenCenter();
+		nuru.x += 40;
+		nuru.y += 20;
+		nuru.shader = tone.shader;
+		// add(nuru);
 
-		add(hitStrum);
-		add(_group);
+		add(chat);
 
-		var script = new HScriptModule('sega/Sega', true);
-	}
+		buttonXD = new MButton(200,400, 'I.. Am Steve');
+		// add(buttonXD);
 
-	override public function update(elapsed:Float){
-		super.update(elapsed);
+		guh = new MBTest();
+		add(guh);
+		guh.build();
 
-		_group.forEach(function(note:FlxSprite){
+		//filters.push(new ShaderFilter(tone.shader));
+		//FlxG.camera.filters = filters;
+		//FlxG.game.setFilters(filters);
 
-			note.y -= 25;
-			
-			if (note.y == 0)note.kill();
-		});
+        vhs.setTint(0.70, 0.70, 0.70, 0);
+		// vhs.setTint(0.7, 0.1, 1.0, 0.2); // purple tint
+        vhs.setDistortion(0);
+        vhs.setAberration(0);
+        vhs.setFlickerStrength(0);
+        vhs.setScanlineStrength(0.06);
+		trace(Sys.systemName() + Ufunc.getOSVer());
+    }
 
-		if(FlxG.mouse.wheel != 0){
-			mScale = FlxG.mouse.wheel;
-			xScale += mScale / 10;
-			_bg.scale.set(xScale,xScale);
-		}
-		report.text ='$xScale';
-
-		if (FlxG.keys.justPressed.SPACE){
-			createNote(_noteCount += 1);}
-	}
-
-	function createNote(?id:Any){
-		var note = new Notes(Std.int(hitStrum.x) , 700);
-		note.ID = id;
-		_group.add(note);
-	}
+    override public function update(elapsed:Float):Void {
+        super.update(elapsed);
+        vhs.update(elapsed);
+		guh.refresh(elapsed);
+    }
 }
-

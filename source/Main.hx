@@ -46,30 +46,9 @@ class Main extends Sprite
 	public function new()
 	{
 		super();
-		if (stage != null)
-		{
-			init();
-		}
-		else
-		{
-			addEventListener(Event.ADDED_TO_STAGE, init);
-		}
-	}
 
-	private function init(?E:Event):Void
-	{
-		if (hasEventListener(Event.ADDED_TO_STAGE))
-		{
-			removeEventListener(Event.ADDED_TO_STAGE, init);
-		}
-
-		setupGame();
-	}
-
-	private function setupGame()
-	{
 		SaveData.save();
-		if(SaveData.app.get('firstTime'))
+		if(SaveData.app.get('firstTime') == true)
 			SaveData.app.set('firstTime', false);
 
 
@@ -85,6 +64,10 @@ class Main extends Sprite
 
 		FlxG.game.focusLostFramerate = 60;
 		FlxG.autoPause = false;
+
+ 		// lime.app.Application.current.window.transparent = true;
+
+		Ufunc.setWinAlpha(0);
 
 		addChild(fpsVar);
 	}

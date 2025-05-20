@@ -156,12 +156,56 @@ class Utils {
 	') 
 	public static function addMinMax() {}
 
-    // XP
+	@:functionCode('
+		HWND hwnd = GetActiveWindow();
+		DWORD style = GetWindowLong(hwnd, GWL_STYLE);
+		style |= WS_SYSMENU;
+		SetWindowLong(hwnd, GWL_STYLE, style);
+		SetWindowPos(hwnd, NULL, 0, 0, 0, 0, SWP_NOSIZE|SWP_NOMOVE|SWP_FRAMECHANGED);
+	') 
+	public static function addButtons() {}
+	
+	@:functionCode('
+		HWND hwnd = GetActiveWindow();
+		DWORD style = GetWindowLong(hwnd, GWL_STYLE);
+		style |= ~WS_SYSMENU;
+		SetWindowLong(hwnd, GWL_STYLE, style);
+		SetWindowPos(hwnd, NULL, 0, 0, 0, 0, SWP_NOSIZE|SWP_NOMOVE|SWP_FRAMECHANGED);
+	') 
+	public static function delButtons() {}
 
     @:functionCode('
 		MessageBox(GetActiveWindow(), message, caption, icon | MB_SETFOREGROUND);
 	')
 	public static function showMessageBox(caption:String, message:String, icon:Int = 1) {}
+
+
+		@:functionCode('
+        int darkMode = mode;
+        HWND window = GetActiveWindow();
+        if (S_OK != DwmSetWindowAttribute(window, 19, &darkMode, sizeof(darkMode))) {
+            DwmSetWindowAttribute(window, 20, &darkMode, sizeof(darkMode));
+        }
+        UpdateWindow(window);
+    ')
+	@:noCompletion
+	public static function _setWindowColorMode(mode:Int)
+	{
+	}
+
+	public static function setWindowColorMode(mode:WindowColorMode)
+	{
+		var darkMode:Int = cast(mode, Int);
+
+		if (darkMode > 1 || darkMode < 0)
+		{
+			trace("WindowColorMode Not Found...");
+
+			return;
+		}
+
+		_setWindowColorMode(darkMode);
+	}
 
 	@:functionCode('
         HWND window = GetActiveWindow();
@@ -180,7 +224,6 @@ class Utils {
     ')
 	public static function setWindowBorderColor(r:Int, g:Int, b:Int){}
 
-
 	@:functionCode('
         HWND window = GetActiveWindow();
 
@@ -197,6 +240,28 @@ class Utils {
     ')
 	public static function setWindowAlpha(alpha:Float) {}
 
+	@functionCode('
+   		// int osver= 0.0;
+
+   		NTSTATUS(WINAPI *RtlGetVersion)(LPOSVERSIONINFOEXW);
+
+  		OSVERSIONINFOEXW osInfo;
+
+    	*(FARPROC*)&RtlGetVersion = GetProcAddress(GetModuleHandleA("ntdll"), "RtlGetVersion");
+
+     	if (NULL != RtlGetVersion)
+     	{
+            osInfo.dwOSVersionInfoSize = sizeof(osInfo);
+            RtlGetVersion(&osInfo);
+            os_ = osInfo.dwMajorVersion;
+			return os_;
+      	}
+	')
+
+	public static function getOSVersion(?os_:Int){
+		return os_;
+	}
+
 	@:functionCode('
 		HWND hwnd = GetActiveWindow();
 
@@ -212,30 +277,7 @@ class Utils {
 
 		return alphaFloat;
 	')
-	public static function getWindowAlpha():Float
-	{
-		return 0;
-	}
-
-	@:functionCode('
-	POINT MousePoint;
-	GetCursorPos(&MousePoint);
-
-	return MousePoint.x;
-    ')
-	static public function getCursorPositionX()
-	{
-		return 0;
-	}
-
-	@:functionCode('
-	POINT MousePoint;
-	GetCursorPos(&MousePoint);
-
-	return MousePoint.y;
-    ')
-	static public function getCursorPositionY()
-	{
+	public static function getWindowAlpha():Float{
 		return 0;
 	}
 
@@ -261,28 +303,6 @@ class Utils {
 		}
     ')
 	public static function hideTaskbar(hide:Bool) {}
-
-	@:functionCode('
-		HWND hd;
-
-		hd = FindWindowA("Progman", NULL);
-		hd = FindWindowEx(hd, 0, "SHELLDLL_DefView", NULL);
-		hd = FindWindowEx(hd, 0, "SysListView32", NULL);
-
-		SetWindowPos(hd, NULL, x, NULL, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
-    ')
-	public static function moveDesktopWindowsInX(x:Int) {}
-
-	@:functionCode('
-		HWND hd;
-
-		hd = FindWindowA("Progman", NULL);
-		hd = FindWindowEx(hd, 0, "SHELLDLL_DefView", NULL);
-		hd = FindWindowEx(hd, 0, "SysListView32", NULL);
-
-		SetWindowPos(hd, NULL, NULL, y, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
-    ')
-	public static function moveDesktopWindowsInY(y:Int) {}
 
 	@:functionCode('
 		HWND window;
